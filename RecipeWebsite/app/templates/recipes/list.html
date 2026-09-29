@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Search / filter bar -->
+<div class="row align-items-end mb-4 g-2">
+  <div class="col-md-6">
+    <h2 class="mb-0">Browse Recipes</h2>
+  </div>
+  <div class="col-md-6">
+    <form class="d-flex gap-2" method="GET">
+      <input type="text" name="q" class="form-control" placeholder="Search by title…"
+             value="{{ search }}">
+      <select name="category" class="form-select" style="max-width:180px">
+        <option value="">All categories</option>
+        {% for val in ["Breakfast","Lunch","Dinner","Dessert","Snack","Soup","Salad","Beverage","Other"] %}
+        <option value="{{ val }}" {% if category == val %}selected{% endif %}>{{ val }}</option>
+        {% endfor %}
+      </select>
+      <button class="btn btn-success" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+  </div>
+</div>
+
+{% if pagination.items %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for recipe in pagination.items %}
+  <div class="col">
+    <div class="card h-100 shadow-sm recipe-card">
+      <div class="card-body">
+        <span class="badge bg-success mb-2">{{ recipe.category or "Uncategorised" }}</span>
+        <h5 class="card-title">{{ recipe.title }}</h5>
+        <p class="card-text text-muted small">{{ recipe.description[:120] }}{% if recipe.description|length > 120 %}…{% endif %}</p>
+        <ul class="list-unstyled small text-muted mb-0">
+          {% if recipe.prep_time %}<li><i class="bi bi-clock me-1"></i>Prep: {{ recipe.prep_time }} min</li>{% endif %}
+          {% if recipe.cook_time %}<li><i class="bi bi-fire me-1"></i>Cook: {{ recipe.cook_time }} min</li>{% endif %}
+          {% if recipe.servings %}<li><i class="bi bi-people me-1"></i>Serves: {{ recipe.servings }}</li>{% endif %}
+        </ul>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        <small class="text-muted">by {{ recipe.author.username }}</small>
+        <a href="{{ url_for('recipes.detail', recipe_id=recipe.id) }}"
+           class="btn btn-sm btn-outline-success">View Recipe</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    {% if pagination.has_prev %}
+    <li class="page-item">
+      <a class="page-link" href="{{ url_for('recipes.list_recipes', page=pagination.prev_num, q=search, category=category) }}">
+        &laquo; Prev
+      </a>
+    </li>
+    {% endif %}
+    {% for p in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+      {% if p %}
+      <li class="page-item {% if p == pagination.page %}active{% endif %}">
+        <a class="page-link" href="{{ url_for('recipes.list_recipes', page=p, q=search, category=category) }}">{{ p }}</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled"><span class="page-link">…</span></li>
+      {% endif %}
+    {% endfor %}
+    {% if pagination.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="{{ url_for('recipes.list_recipes', page=pagination.next_num, q=search, category=category) }}">
+        Next &raquo;
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% else %}
+<div class="text-center py-5">
+  <i class="bi bi-search display-3 text-muted"></i>
+  <p class="mt-3 text-muted">No recipes found. Try a different search or
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('recipes.new_recipe') }}">add one</a>!
+    {% else %}
+      <a href="{{ url_for('auth.register') }}">sign up</a> and add the first one!
+    {% endif %}
+  </p>
+</div>
+{% endif %}
+{% endblock %}
