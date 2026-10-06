@@ -1,9 +1,3 @@
-.env
-__pycache__/
-*.py[cod]
-*.pyo
-venv/
-.venv/
-*.egg-info/
-dist/
-build/
+# Holds the real database password. Created on the server from
+# app/config.sample.php; never commit it.
+app/config.php

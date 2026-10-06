@@ -1,0 +1,4 @@
+# Everything here is deployed to Linux. Keep LF line endings on every
+# platform so setup.sh, the SQL files and the configs work when copied
+# straight from a Windows checkout.
+* text=auto eol=lf

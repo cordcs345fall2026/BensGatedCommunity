@@ -1,0 +1,150 @@
+/* Recipe Box: a ruled index card on a kitchen counter. */
+
+:root {
+  --counter: #e7edf1;
+  --card: #ffffff;
+  --ink: #16252e;
+  --muted: #55656f;
+  --rule: #b9d4e6;     /* the blue lines on an index card */
+  --headline: #d1495b; /* the red line under a card's title */
+  --link: #1a5a88;
+  --danger: #a32029;
+  --heading-font: Rockwell, "Roboto Slab", "DejaVu Serif", Georgia, serif;
+  --body-font: "Segoe UI", Ubuntu, Calibri, "DejaVu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--counter);
+  color: var(--ink);
+  font: 1rem/1.55 var(--body-font);
+}
+
+.site-header,
+main {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+main { padding-bottom: 3rem; }
+
+.site-name {
+  font: 700 1.6rem/1 var(--heading-font);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+h1, h2 { font-family: var(--heading-font); line-height: 1.15; }
+h1 { font-size: 1.9rem; margin: 1.25rem 0 0.4rem; }
+h2 { font-size: 1.2rem; margin: 1.5rem 0 0.25rem; }
+p { margin: 0.4rem 0 0.8rem; }
+
+a { color: var(--link); }
+:focus-visible { outline: 3px solid #f2b705; outline-offset: 2px; }
+
+button,
+.button {
+  display: inline-block;
+  border: 0;
+  border-radius: 0.25rem;
+  padding: 0.55rem 0.95rem;
+  background: var(--link);
+  color: #fff;
+  font: 600 1rem/1.2 var(--body-font);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button.danger { background: var(--danger); }
+a.danger { color: var(--danger); }
+.muted { color: var(--muted); }
+
+/* Recipe list: each row sits on its own ruled line. */
+.recipes {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  background: var(--card);
+  border-top: 2px solid var(--headline);
+}
+
+.recipes li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 1rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.recipes a { font-weight: 600; font-size: 1.08rem; }
+.recipes p { grid-column: 1 / -1; margin: 0.15rem 0 0; color: var(--muted); }
+.category { color: var(--muted); font-size: 0.9rem; }
+
+.card {
+  background: var(--card);
+  padding: 0.25rem 1.5rem 1.5rem;
+}
+
+article.card h1 {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--headline);
+}
+
+.lead { font-size: 1.1rem; }
+
+.facts { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin: 1rem 0 0; }
+.facts dt { color: var(--muted); font-size: 0.85rem; }
+.facts dd { margin: 0; font-weight: 600; }
+
+.ruled { margin: 0; padding-left: 1.4rem; }
+.ruled li { padding: 0.4rem 0; border-bottom: 1px solid var(--rule); }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.25rem; }
+
+.search { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.search label { flex-basis: 100%; }
+.search input { flex: 1 1 14rem; }
+
+label { display: block; margin-top: 1rem; font-weight: 600; }
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #8fa3b0;
+  border-radius: 0.25rem;
+  background: #fff;
+  color: var(--ink);
+  font: 1rem/1.4 var(--body-font);
+}
+
+.row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 0.75rem; }
+
+.notice {
+  margin: 1rem 0;
+  padding: 0.6rem 0.9rem;
+  background: #e3f4e8;
+  border-left: 4px solid #2e7d4f;
+}
+
+.error { margin: 0.3rem 0 0; color: var(--danger); font-weight: 600; }
+
+.pages { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; }
+
+@media (max-width: 30rem) {
+  .row { grid-template-columns: 1fr; }
+  .card { padding: 0.25rem 1rem 1rem; }
+}
