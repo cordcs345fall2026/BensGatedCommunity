@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remove recipe - Recipe Box</title>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body data-page="remove">
+<header class="site-header">
+  <a class="site-name" href="index.html">Recipe Box</a>
+  <a class="button" href="add.html">Add a recipe</a>
+</header>
+<main>
+<p id="status">Loading recipe&hellip;</p>
+<noscript><p class="error">This site needs JavaScript to remove recipes from the database.</p></noscript>
+
+<div id="content" hidden>
+<h1 id="heading">Remove this recipe?</h1>
+<p>This deletes the recipe from the database. It can&rsquo;t be undone.</p>
+<form class="actions" id="remove-form">
+  <button type="submit" class="danger">Remove recipe</button>
+  <a id="keep" href="index.html">Keep it</a>
+</form>
+</div>
+</main>
+</body>
+</html>

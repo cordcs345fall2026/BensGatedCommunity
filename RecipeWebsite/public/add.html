@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add a recipe - Recipe Box</title>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body data-page="add">
+<header class="site-header">
+  <a class="site-name" href="index.html">Recipe Box</a>
+  <a class="button" href="add.html">Add a recipe</a>
+</header>
+<main>
+<h1>Add a recipe</h1>
+<p class="error" role="alert" id="form-error" hidden></p>
+<noscript><p class="error">This site needs JavaScript to save recipes to the database.</p></noscript>
+
+<form class="card" id="add-form">
+  <label for="title">Recipe name</label>
+  <input id="title" name="title" required minlength="3" maxlength="100">
+
+  <label for="category">Category</label>
+  <select id="category" name="category" required>
+    <option value="">Choose one</option>
+    <option>Breakfast</option>
+    <option>Lunch</option>
+    <option>Dinner</option>
+    <option>Dessert</option>
+    <option>Snack</option>
+    <option>Soup</option>
+    <option>Salad</option>
+    <option>Beverage</option>
+    <option>Other</option>
+  </select>
+
+  <label for="description">Short description</label>
+  <input id="description" name="description" required maxlength="300">
+
+  <div class="row">
+    <div>
+      <label for="prep_minutes">Prep minutes</label>
+      <input id="prep_minutes" name="prep_minutes" type="number" min="0" max="1440" required>
+    </div>
+    <div>
+      <label for="cook_minutes">Cook minutes</label>
+      <input id="cook_minutes" name="cook_minutes" type="number" min="0" max="1440" required>
+    </div>
+    <div>
+      <label for="servings">Servings</label>
+      <input id="servings" name="servings" type="number" min="1" max="100" required>
+    </div>
+  </div>
+
+  <label for="ingredients">Ingredients, one per line</label>
+  <textarea id="ingredients" name="ingredients" rows="6" required maxlength="2000"></textarea>
+
+  <label for="instructions">Steps, one per line</label>
+  <textarea id="instructions" name="instructions" rows="8" required maxlength="4000"></textarea>
+
+  <p class="actions">
+    <button type="submit">Add recipe</button>
+    <a href="index.html">Cancel</a>
+  </p>
+</form>
+</main>
+</body>
+</html>

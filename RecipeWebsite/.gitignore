@@ -1,3 +1,5 @@
 # Holds the real database password. Created on the server from
-# app/config.sample.php; never commit it.
-app/config.php
+# app/config.sample.py; never commit it.
+app/config.py
+
+__pycache__/
