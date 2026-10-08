@@ -15,9 +15,6 @@
 
 * { box-sizing: border-box; }
 
-/* app.js shows and hides parts of a page with the hidden attribute. */
-[hidden] { display: none !important; }
-
 body {
   margin: 0;
   background: var(--counter);
@@ -70,7 +67,6 @@ button,
   cursor: pointer;
 }
 
-button:disabled { opacity: 0.6; cursor: default; }
 button.danger { background: var(--danger); }
 a.danger { color: var(--danger); }
 .muted { color: var(--muted); }
